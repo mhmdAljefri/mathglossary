@@ -16,9 +16,7 @@ import promise from 'redux-promise';
 import thunk from 'redux-thunk';
 
 // reducers
-import citiesReducer from './cities/reducer';
 import termsReducer from './terms/reducer';
-import buildingsReducer from './buildings/reducer';
 import localesReducer from './locales/reucer';
 
 import AppNavigator from '../routes';
@@ -27,10 +25,8 @@ const navReducer = createNavigationReducer(AppNavigator);
 const appReducer = combineReducers({
   i18n: i18nReducer,
   nav: navReducer,
-  citiesReducer,
   terms: termsReducer,
   locales: localesReducer,
-  buildingsReducer,
 });
 
 // Note: createReactNavigationReduxMiddleware must be run before reduxifyNavigator

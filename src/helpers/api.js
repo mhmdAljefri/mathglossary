@@ -1,30 +1,28 @@
-import axios from "axios";
-import { ToastAndroid, AsyncStorage } from 'react-native'
+import Axios from "axios";
 
-axios.defaults.baseURL = 'https://api.dev.diar.app/v1/';
-// axios.defaults.headers.common['Authorization'] = 'AUTH_TOKEN';
-axios.defaults.headers.common['Content-Type'] = 'application/json';
-axios.defaults.headers.common['Accept'] = 'application/json';
-axios.defaults.headers.common['timeout'] = 8000;
+const headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json',
+  'locale': 'ar',
+  'access': 'admin',
+};
 
-function hitAPI(method = 'GET', route, params ={}, body = {}) {
-  const request = axios[method](`${route}`, {
-    params,
-  }, {
-    body
-  })
-  return request;
-}
+const http = Axios.create({
+  baseURL: 'https://mathglossary-api.herokuapp.com/v1/',
+  headers,
+});
 
-export const getCity = (params = {}) => {
-  const request = hitAPI('get', 'cities', params)
-    .catch((error) => ToastAndroid.show(errorHandler(error), ToastAndroid.SHORT))
-  return request;
-}
+// Axios.defaults.headers = headers();
+http.interceptors.response.use(null, ({ response }) => {
+  const { store } = createStore()
+  let error = '';
+  if (response.status === 401) store.dispatch({ type: 'LOGOUT' });
+  if (response) error = response.data.error;
+  else {
+    if (window.navigator.onLine) error = 'Application Error';
+    else error = I18n.t('No Internet Connection');
+  }
+  return Promise.reject(error);
+});
 
-export function errorHandler(error) {
-  if (!error.response) return 'No Internet connection or Server Error';
-  return error.response.message;
-}
-
-export default hitAPI;
+export default http;

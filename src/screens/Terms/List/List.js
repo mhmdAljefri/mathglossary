@@ -15,7 +15,7 @@ import ExpertTeachers from '../../../components/ExpertTeachers';
 import HotelFilters from '../../../components/HotelFilters';
 import Paragraph from '../../../components/atom/Paragraph';
 
-export default class Hotels extends Component {
+export default class List extends Component {
   static navigationOptions = () => {
     return {
       header: null,
@@ -28,15 +28,14 @@ export default class Hotels extends Component {
   };
 
   componentDidMount() {
-    this.getHotels()
+    this.handleGetList()
   }
 
-  getHotels = (params, pushArray) => {
-    const { getList, filters, cityID, } = this.props;
+  handleGetList = (params, pushArray) => {
+    const { getList, filters, } = this.props;
     const newParams = {
       ...params,
       ...filters,
-      city_id: cityID,
       limit: 3,
     };
     getList(newParams, pushArray);
@@ -46,7 +45,7 @@ export default class Hotels extends Component {
     const { pagination } = this.props;
     if (pagination) {
       if (pagination.next_page) {
-        this.getHotels({ page: pagination.next_page }, true)
+        this.handleGetList({ page: pagination.next_page }, true)
       }
     }
   }
@@ -67,7 +66,7 @@ export default class Hotels extends Component {
         <FeedBack onPress={this.toggleModal} />
         <ExpertTeachers onPress={this.toggleModal} />
         <HeaderFilter
-          onPressSearchDone={this.getHotels}
+          onPressSearchDone={this.handleGetList}
           onPressFilter={this.toggleModal}
           title={I18n.t('terms')}
         />
@@ -78,11 +77,11 @@ export default class Hotels extends Component {
           <NoData
             isFetching={refreshing}
             message={error}
-            onRefresh={this.getHotels}
+            onRefresh={this.handleGetList}
           /> :
           <FlatList
             refreshing={refreshing}
-            onRefresh={this.getHotels}
+            onRefresh={this.handleGetList}
             onEndReached={this.handleEndReached}
             onEndReachedThreshold={0.1}
             data={list}
@@ -97,7 +96,7 @@ export default class Hotels extends Component {
           isOpen={this.state.isModalOpen}
           onClose={this.toggleModal}
         >
-          <HotelFilters onSubmit={this.getHotels} />
+          <HotelFilters onSubmit={this.handleGetList} />
         </Modal>
       </Continer>
     )

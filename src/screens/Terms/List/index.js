@@ -9,9 +9,6 @@ const mapStateToProps = ({
     fetching,
     error,
     pagination,
-  },
-  citiesReducer: {
-    cityID,
   }
 }) => ({
   list,
@@ -19,7 +16,6 @@ const mapStateToProps = ({
   pagination,
   fetching,
   error,
-  cityID,
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -24,10 +24,6 @@ const style = StyleSheet.create({
 })
 
 export default class Splash extends React.PureComponent {
-  state = {
-    timeFinshed: false,
-  }
-
   timer = null
   componentDidMount() {
     this.timer = setTimeout(() => this.props.navigation.navigate('Terms'), 5000)

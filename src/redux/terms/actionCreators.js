@@ -1,30 +1,16 @@
-import axios from 'axios';
+import Api from '../../helpers/api';
 
 export const getList = (params = {}, pushArray = false) => dispatch => {
   dispatch({
-    type: 'GET_HOTELS',
+    type: 'GET_MATHWORDS',
   })
-  axios.get('hotel_units', { params })
+  return Api.get('mathwords', { params })
   .then(response => dispatch({
-    type: 'GET_HOTELS_FULFILLED',
+    type: 'GET_MATHWORDS_FULFILLED',
     payload: response,
     pushArray,
-  })).catch(error => dispatch({
-    type: 'GET_HOTELS_REJECTED',
-    payload: error
+  })).catch((error = {}) => dispatch({
+    type: 'GET_MATHWORDS_REJECTED',
+    payload: error,
   }));
 };
-
-export const getRecord = (id, params) => dispatch => {
-  dispatch({
-    type: 'GET_HOTEL',
-  })
-  axios.get(`hotel_units/${id}`, { params })
-  .then(response => dispatch({
-    type: 'GET_HOTEL_FULFILLED',
-    payload: response,
-  })).catch(error => dispatch({
-    type: 'GET_HOTEL_REJECTED',
-    payload: error
-  }));
-}

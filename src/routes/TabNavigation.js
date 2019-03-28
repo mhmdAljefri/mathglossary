@@ -24,7 +24,6 @@ export default createBottomTabNavigator(
       }),
     },
   },
-  
   {
     order: ['Terms'],
     tabBarOptions: {

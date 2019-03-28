@@ -11,7 +11,7 @@ const filters = {
 };
 
 const initialState = {
-  list: HOTELS,
+  list: [],
   details: null,
   pagination: {
     current_page: 1,
@@ -24,53 +24,34 @@ const initialState = {
 
 export default (state = initialState, { type, payload, pushArray }) => {
   switch (type) {
-    case 'GET_HOTELS':
+    case 'GET_MATHWORDS':
       return {
         ...state,
         fetching: true,
       };
   
-    case 'GET_HOTELS_FULFILLED':
-      const { pagination, hotel_units } = payload.data.data;
+    case 'GET_MATHWORDS_FULFILLED':
+      const { pagination, mathwords } = payload.data.data;
       const terms = pushArray ? [
         ...state.terms,
-        ...hotel_units,
-      ] : hotel_units;
+        ...mathwords,
+      ] : mathwords;
+      console.log('GET_MATHWORDS_FULFILLED')
       return {
         ...state,
         fetching: false,
-        terms,
+        list: terms,
         pagination,
         error: '',
       }
   
-    case 'GET_HOTELS_REJECTED':
-      return {
+    case 'GET_MATHWORDS_REJECTED':
+    console.log('GET_MATHWORDS_REJECTED'. error)
+    return {
         ...state,
         fetching: false,
         error: errorHandler(payload),
       }
-
-    case 'GET_HOTEL':
-    return {
-      ...state,
-      fetching: true,
-    };
-
-  case 'GET_HOTEL_FULFILLED':
-    return {
-      ...state,
-      fetching: false,
-      details: payload.data.data.hotel_unit,
-    }
-
-  case 'GET_HOTEL_REJECTED':
-    return {
-      ...state,
-      details: null,
-      fetching: false,
-      error: errorHandler(payload),
-    }
 
     default:
       return state;
