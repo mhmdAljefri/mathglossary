@@ -17,6 +17,7 @@ export default  {
   // N
   // O
   // P
+  practice_applications: 'Practice Applications May Help To Understand Glassory',
   // Q
   // R
   // S

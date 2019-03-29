@@ -17,6 +17,7 @@ import thunk from 'redux-thunk';
 
 // reducers
 import termsReducer from './terms/reducer';
+import applicationsReducer from './applications/reducer';
 import localesReducer from './locales/reucer';
 
 import AppNavigator from '../routes';
@@ -26,6 +27,7 @@ const appReducer = combineReducers({
   i18n: i18nReducer,
   nav: navReducer,
   terms: termsReducer,
+  applications: applicationsReducer,
   locales: localesReducer,
 });
 

@@ -17,6 +17,7 @@ export default  {
   // N
   // O
   // P
+  practice_applications: 'طبق أكثر لفهم المصطلح',
   // Q
   // R
   // S
