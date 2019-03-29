@@ -25,13 +25,13 @@ const MyIcon = ({locale}) => {
   )
 }
 
-const ListItem = ({ onPress, text, delay, animation = 'fadeIn', locale }) => {
+const ListItem = ({ onPress, textObject = { ar: '', en: ''}, delay, animation = 'fadeIn', locale }) => {
   return (
     <TouchableHighlight
       onPress={onPress}
     >
       <Animatable.View delay={delay} animation={animation} style={style.container}>
-        <Text>{text}-{locale}</Text>
+        <Text>{locale === 'ar' ? textObject.en : textObject.ar }</Text>
         <MyIcon locale={locale} />
       </Animatable.View>
     </TouchableHighlight>

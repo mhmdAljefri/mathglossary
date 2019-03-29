@@ -1,5 +1,3 @@
-import { errorHandler } from "../../helpers/api";
-import { HOTELS } from '../../assets/demo';
 const filters = {
   parking: false,
   resturant: false,
@@ -11,7 +9,14 @@ const filters = {
 };
 
 const initialState = {
-  list: [],
+  list: [
+    {
+      term_ar: 'الدائرة',
+      term_description_ar: 'وصف الدائرة',
+      term_description_en: 'Circle Descritions',
+      term_en: 'Circle',
+    }
+  ],
   details: null,
   pagination: {
     current_page: 1,
@@ -46,11 +51,11 @@ export default (state = initialState, { type, payload, pushArray }) => {
       }
   
     case 'GET_MATHWORDS_REJECTED':
-    console.log('GET_MATHWORDS_REJECTED'. error)
+    console.log('GET_MATHWORDS_REJECTED', payload)
     return {
         ...state,
         fetching: false,
-        error: errorHandler(payload),
+        error: payload,
       }
 
     default:

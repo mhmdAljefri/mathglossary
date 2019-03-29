@@ -87,7 +87,7 @@ export default class List extends Component {
             data={list}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item, index }) => (
-              <ListItem delay={index * 200} onPress={() => this.showDetails(item)} text={item.title} />
+              <ListItem delay={index * 200} onPress={() => this.showDetails(item)} textObject={{ en: item.term_en, ar: item.term_ar }} />
             )}
           />
         }

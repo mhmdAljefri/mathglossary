@@ -15,8 +15,6 @@ export default class HotelDetails extends Component {
 
   componentDidMount() {
     BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
-    const { defaultData } = this.props.navigation.state.params
-    this.props.getRecord(defaultData.id, { locale: 'ar' })
   }
 
   componentWillUnmount = () => {
@@ -29,15 +27,16 @@ export default class HotelDetails extends Component {
   }
 
   render() {
-    const { details, navigation } = this.props;
-    const { defaultData } = navigation.state.params;
-    const data = details || defaultData;
+    const { navigation, locale } = this.props;
+    const { defaultData: data } = navigation.state.params;
+    const toTransateLang = locale == 'ar' ? 'en' : 'ar';
+    const currentLang = locale == 'ar' ? 'ar' : 'en'; // to avoid anoth language such chiense and so on.
     return (
       <Continer style={{ flex: 1 }}>
         <View style={{ flex: 1, padding: 10, justifyContent: 'center', alignItems: 'center', }}>
-          <Paragraph color="primary" bold>{data.title}</Paragraph>
-          <Paragraph bold>{data.translation}</Paragraph>
-          <Paragraph>{data.description}</Paragraph>
+          <Paragraph color="primary" bold>{data[`term_${currentLang}`]}</Paragraph>
+          <Paragraph bold>{data[`term_${toTransateLang}`]}</Paragraph>
+          <Paragraph>{data[`term_description_${currentLang}`]}</Paragraph>
         </View>
       </Continer>
     )

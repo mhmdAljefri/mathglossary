@@ -1,4 +1,5 @@
 import Axios from "axios";
+import { I18n } from 'react-redux-i18n';
 
 const headers = {
   'Content-Type': 'application/json',
@@ -8,20 +9,16 @@ const headers = {
 };
 
 const http = Axios.create({
-  baseURL: 'https://mathglossary-api.herokuapp.com/v1/',
+  baseURL: 'http://127.0.0.1:3000/v1/',
   headers,
 });
 
 // Axios.defaults.headers = headers();
 http.interceptors.response.use(null, ({ response }) => {
-  const { store } = createStore()
   let error = '';
-  if (response.status === 401) store.dispatch({ type: 'LOGOUT' });
+  console.log({response})
   if (response) error = response.data.error;
-  else {
-    if (window.navigator.onLine) error = 'Application Error';
-    else error = I18n.t('No Internet Connection');
-  }
+  else error = I18n.t('Please contact admin');
   return Promise.reject(error);
 });
 
