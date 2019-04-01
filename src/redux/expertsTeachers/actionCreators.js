@@ -2,15 +2,15 @@ import Api from '../../helpers/api';
 
 export const getList = (params = {}, pushArray = false) => dispatch => {
   dispatch({
-    type: 'GET_APPLICATION',
+    type: 'GET_TEACHERS',
   })
-  return Api.get('applications', { params })
+  return Api.get('teachers', { params })
   .then(response => dispatch({
-    type: 'GET_APPLICATION_FULFILLED',
+    type: 'GET_TEACHERS_FULFILLED',
     payload: response,
     pushArray,
   })).catch((error) => dispatch({
-    type: 'GET_APPLICATION_REJECTED',
+    type: 'GET_TEACHERS_REJECTED',
     payload: error,
   }));
 };

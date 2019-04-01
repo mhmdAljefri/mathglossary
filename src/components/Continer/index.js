@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {  View, Text, NetInfo, BackHandler } from 'react-native';
+import {  View, NetInfo } from 'react-native';
 import Offline from './components/Offline';
 import { withNavigation } from 'react-navigation';
 

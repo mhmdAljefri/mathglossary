@@ -12,10 +12,6 @@ export default (props) => {
         justifyContent: 'center',
         alignItems: 'center'
       }}>
-        <Image
-          source={logo}
-          style={{ width: 20, height: 30 }}
-        />
         <Text style={{ paddingHorizontal: 10 }}>
           {title}
         </Text>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, Text, Alert, View, StyleSheet } from 'react-native';
+import { Modal, Text, View, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import { COLORS } from '../../helpers/ui';
 

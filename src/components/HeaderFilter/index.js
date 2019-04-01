@@ -13,6 +13,7 @@ import { COLORS } from '../../helpers/ui';
 import Search from './Search';
 import MyIcon from './MyIcon';
 import { withNavigation } from 'react-navigation';
+import { I18n } from 'react-i18nify';
 
 const BACK_BUTTON_WIDTH = 60;
 
@@ -46,12 +47,11 @@ class SearchFilter extends Component {
           />
         {isSearch || (<React.Fragment>
             <View style={styles.title}>
-              <Image source={logo}/>
-              <Text style={{ lineHeight: 60 }}>{title}</Text>
+              <Text style={{ lineHeight: 60, fontWeight: 'bold', fontSize: 20 }}>{I18n.t(title)}</Text>
             </View>
             <View style={styles.icons}>
               <MyIcon color={COLORS.primary} {...this.props} onPress={this.toggleSearch} style={styles.icon} name="search" />
-              <MyIcon color={COLORS.primary} {...this.props} onPress={this.navigator} style={styles.icon} name="map-pin" />
+              <MyIcon color={COLORS.primary} {...this.props} onPress={this.navigator} style={styles.icon} name="info" />
             </View>
           </React.Fragment>)}
       </View>

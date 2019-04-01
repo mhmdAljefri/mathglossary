@@ -7,6 +7,8 @@ import Icon from 'react-native-vector-icons/Feather';
 import { COLORS } from '../helpers/ui';
 import TermsStack from '../screens/Terms';
 import ApplicationsStack from '../screens/Applications';
+import TestsitesStack from '../screens/Testsites';
+import SuggestionLinksStack from '../screens/SuggestionLinks'
 import { I18n } from 'react-redux-i18n';
 
 export default createBottomTabNavigator(
@@ -15,10 +17,10 @@ export default createBottomTabNavigator(
       screen: TermsStack,
       navigationOptions: () => ({
         tabBarLabel: I18n.t('terms'),
-        tabBarIcon: ({ tintColor, focused }) => (
+        tabBarIcon: ({ tintColor }) => (
           <Icon
-            name={focused ? 'pause' : 'pause'}
-            size={26}
+            name="type"
+            size={24}
             style={{ color: tintColor }}
           />
         )
@@ -28,9 +30,48 @@ export default createBottomTabNavigator(
       screen: ApplicationsStack,
       navigationOptions: () => ({
         tabBarLabel: I18n.t('applications'),
-        tabBarIcon: ({ tintColor, focused }) => (
+        tabBarIcon: ({ tintColor }) => (
           <Icon
-            name={focused ? 'pause' : 'pause'}
+            name="book-open"
+            size={26}
+            style={{ color: tintColor }}
+          />
+        )
+      }),
+    },
+    Testsites: {
+      screen: TestsitesStack,
+      navigationOptions: () => ({
+        tabBarLabel: I18n.t('test_sites'),
+        tabBarIcon: ({ tintColor }) => (
+          <Icon
+            name="check-square"
+            size={26}
+            style={{ color: tintColor }}
+          />
+        )
+      }),
+    },
+    SuggestionLinks: {
+      screen: SuggestionLinksStack,
+      navigationOptions: () => ({
+        tabBarLabel: I18n.t('suggestion_links'),
+        tabBarIcon: ({ tintColor }) => (
+          <Icon
+            name="link"
+            size={26}
+            style={{ color: tintColor }}
+          />
+        )
+      }),
+    },
+    Profile: {
+      screen: ApplicationsStack,
+      navigationOptions: () => ({
+        tabBarLabel: I18n.t('profile'),
+        tabBarIcon: ({ tintColor }) => (
+          <Icon
+            name="user"
             size={26}
             style={{ color: tintColor }}
           />
@@ -39,10 +80,10 @@ export default createBottomTabNavigator(
     },
   },
   {
-    order: ['Terms', 'Applications'],
+    order: ['Terms', 'Applications', 'Testsites', 'SuggestionLinks', 'Profile'],
     tabBarOptions: {
       activeTintColor: COLORS.primary,
-      inactiveTintColor: '#d0d0d0',
+      inactiveTintColor: COLORS.light,
       style: {
         backgroundColor: 'white',
       }

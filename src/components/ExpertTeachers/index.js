@@ -9,9 +9,12 @@ import {
 } from 'react-native';
 import * as Animatable from 'react-native-animatable'
 import Icon from 'react-native-vector-icons/Feather';
+import { I18n } from 'react-redux-i18n';
+import { connect } from 'react-redux';
+
 import Modal from '../Modal';
 import { COLORS } from '../../helpers/ui';
-import { I18n } from 'react-i18nify';
+import { getList } from '../../redux/expertsTeachers/actionCreators';
 
 const StyledInnerView = ({ children }) => (
   <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', }}>
@@ -25,7 +28,7 @@ class TeacherItem extends React.Component {
   }
   toggleDetails = () => this.setState({ isOpen: !this.state.isOpen })
   render() {
-    const { name, job, email, mobile, delay } = this.props;
+    const { name, job, email, delay } = this.props;
     return (
       <Animatable.View
         animation="fadeInUp"
@@ -33,21 +36,26 @@ class TeacherItem extends React.Component {
         style={{ borderBottomWidth: 2, borderBottomColor: '#eee', padding: 10, }}
       >
         <TouchableWithoutFeedback onPress={this.toggleDetails}>
-          <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginBottom: 10, }}>
+          <View style={styles.betweenWrapper}>
             <StyledInnerView>
               <Icon size={20} name="user" />
               <Text style={{ fontWeight: 'bold', fontSize: 20, marginHorizontal: 10, }}>{name}</Text>
             </StyledInnerView>
             <StyledInnerView>
-              <Text style={{ fontWeight: 'bold', marginHorizontal: 10, }}>{job}</Text>
               <Icon name="chevron-down" />
             </StyledInnerView>
           </View>
         </TouchableWithoutFeedback>
         {this.state.isOpen && (
           <Animatable.View animation="fadeIn">
-            <Text>{email}</Text>
-            <Text>{mobile}</Text>
+            <View style={styles.betweenWrapper}>
+              <Text>{I18n.t('job')}</Text>
+              <Text style={{ fontWeight: 'bold', color: COLORS.primary }}>{job}</Text>
+            </View>
+            <View style={styles.betweenWrapper}>
+              <Text>{I18n.t('email')}</Text>
+              <Text>{email}</Text>
+            </View>
           </Animatable.View>
         )}
       </Animatable.View>
@@ -55,32 +63,34 @@ class TeacherItem extends React.Component {
   }
 }
 
-export default class Main extends Component {
-  expertTeacher = id => ({
-    id,
-    name: `Ali-${id}`,
-    job: 'Algarbr tacher',
-    email: 'ali@math.app',
-    mobile: '737048111',
-  })
-  defaultParams = {
-    refreshing: false,
-  };
+const limit = 8;
+class Main extends Component {
   state = {
-    list: [],
     isOpen: false,
-    ...this.defaultParams,
   }
 
-  getList = () => {
-    // TODO: FETCHING EXPERT TEACHERS FROM API
+  componentDidMount() {
+    this.handleGetList();
+  }  
+
+  handleGetList = (params, pushArray) => {
+    this.props.getList({...params, limit}, pushArray).then(response => {
+    }).catch(error => console.log({error}));
   }
+
   handleEndReached = () => {
-    // TODO: FETCHING EXPERT TEACHER FROM getList WITH PAGINATION
+    const { pagination } = this.props;
+    console.log({pagination})
+    if (pagination) {
+      if (pagination.next_page) {
+        this.handleGetList({ page: pagination.next_page }, true)
+      }
+    }
   }
+
   toggleModal = () => this.setState({ isOpen: !this.state.isOpen });
   render() {
-    const { refreshing, list } = this.state;
+    const { fetching, list } = this.props;
     return (
       <React.Fragment>
         <Modal
@@ -89,11 +99,11 @@ export default class Main extends Component {
           onClose={this.toggleModal}
         >
           <FlatList
-            refreshing={refreshing}
-            onRefresh={this.getList}
+            refreshing={fetching}
+            onRefresh={this.handleGetList}
             onEndReached={this.handleEndReached}
             onEndReachedThreshold={0.1}
-            data={[...Array(10)].map((data, index) => this.expertTeacher(index))}
+            data={list}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item, index }) => (
               <TeacherItem
@@ -110,11 +120,11 @@ export default class Main extends Component {
         >
           <Animatable.View
             animation="pulse"
-            easing="ease-out"
+            easing="ease-in"
             iterationCount="infinite"
             duration={600}
           >
-            <Icon color={COLORS.primary} name="users" size={24} />
+            <Icon color={COLORS.primary} name="users" size={18} />
           </Animatable.View>
         </TouchableHighlight>
       </React.Fragment>
@@ -123,6 +133,7 @@ export default class Main extends Component {
 }
 
 const styles = StyleSheet.create({
+  betweenWrapper: { display: 'flex', flexDirection: 'row', justifyContent: 'space-between', marginBottom: 10, },
   floating_action: {
     display: 'flex',
     position: 'absolute',
@@ -146,4 +157,23 @@ const styles = StyleSheet.create({
   button: {
     width: '100%'
   }
-})
+});
+
+const mapStateToProps = ({ teacher:
+  {
+    list,
+    pagination,
+    fetching
+  },
+}) => ({
+  list,
+  fetching,
+  pagination,
+});
+
+const mapDispatchToProps = dispatch => ({
+  getList: (params, pushArray) => dispatch(getList(params, pushArray)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main);
+

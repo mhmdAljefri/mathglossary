@@ -6,6 +6,8 @@ import {
   ActivityIndicator,
   StyleSheet,
 } from 'react-native'
+import * as Animatable from 'react-native-animatable'
+
 import logo from '../../assets/img/zayed_uni.jpg'
 import { I18n } from 'react-redux-i18n';
 
@@ -36,10 +38,14 @@ export default class Splash extends React.PureComponent {
   render() {
     return (
       <View style={style.container}>
-        <View style={style.logo}>
+        <Animatable.View
+          animation="zoomIn"
+          delay={2000}
+          style={style.logo}
+        >
           <Image source={logo} style={{ resizeMode: 'cover' }} />
           <Text>{I18n.t('math_is_fun')}</Text>
-        </View>
+        </Animatable.View>
         <ActivityIndicator style={{ marginBottom: 20 }} color="#000" />
       </View>
     )

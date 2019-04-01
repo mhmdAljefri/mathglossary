@@ -2,18 +2,40 @@ import React, { Component } from 'react';
 
 import {
   FlatList,
+  Linking,
+  Text,
+  TouchableNativeFeedback,
 } from 'react-native';
 import { I18n } from 'react-redux-i18n';
 import _ from 'lodash';
-import ListItem from '../../../components/ListItem';
 import NoData from '../../../components/NoData';
 import Continer from '../../../components/Continer';
 import HeaderFilter from '../../../components/HeaderFilter';
 import FeedBack from '../../../components/FeedBack';
+import AddSuggetionLink from '../../../components/AddSuggetionLink';
 import ExpertTeachers from '../../../components/ExpertTeachers';
 import Paragraph from '../../../components/atom/Paragraph';
+import { View } from 'react-native-animatable';
+import Icon from 'react-native-vector-icons/Feather';
+import { COLORS } from '../../../helpers/ui';
+
 
 export default class List extends Component {
+  renderListItem = ({item}) => {
+    const currentLocale = this.props.locale === 'ar' ? 'ar' : 'en';
+    const url = item[`url_${currentLocale}`]
+    return (
+      <View style={{ flexDirection: 'row', margin: 10, padding: 10, elevation: 2, borderRadius: 15, backgroundColor: '#eee', display: 'flex', justifyContent: 'space-between', alignItems: 'center', }}>
+        <View>
+          <Text>{item[`name_${currentLocale}`]}</Text>
+          <Text>{item[`description_${currentLocale}`]}</Text>
+        </View>
+        <TouchableNativeFeedback onPress={() => this.showDetails(url)}>
+          <View><Icon color={COLORS.primary} size={24} name="external-link" /></View>
+        </TouchableNativeFeedback>
+      </View>
+    )
+  }
   static navigationOptions = () => {
     return {
       header: null,
@@ -26,6 +48,7 @@ export default class List extends Component {
   };
 
   componentDidMount() {
+    console.log('fet')
     this.handleGetList()
   }
 
@@ -48,9 +71,7 @@ export default class List extends Component {
     }
   }
 
-  showDetails = (item) => {
-    this.props.navigation.navigate('ApplicationDetails', { defaultData: item });
-  }
+  showDetails = (url) => Linking.openURL(url);
 
   toggleModal = () => {
     this.setState(prevState => ({ isModalOpen: !prevState.isModalOpen }))
@@ -61,15 +82,16 @@ export default class List extends Component {
 
     return (
       <Continer main>
+        <AddSuggetionLink />
         <FeedBack onPress={this.toggleModal} />
         <ExpertTeachers onPress={this.toggleModal} />
         <HeaderFilter
           onPressSearchDone={this.handleGetList}
           onPressFilter={this.toggleModal}
-          title={I18n.t('terms')}
+          title={I18n.t('testsites')}
         />
         <Paragraph style={{ padding: 50, textAlign: 'center', fontSize: 22 }}>
-          {I18n.t('practice_applications')}
+          {I18n.t('testsites_description')}
         </Paragraph>
         {(_.isEmpty(list)) ?
           <NoData
@@ -84,9 +106,7 @@ export default class List extends Component {
             onEndReachedThreshold={0.1}
             data={list}
             keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item, index }) => (
-              <ListItem delay={index * 200} onPress={() => this.showDetails(item)} textObject={{ en: item.application_en, ar: item.application_ar }} />
-            )}
+            renderItem={this.renderListItem}
           />
         }
       </Continer>

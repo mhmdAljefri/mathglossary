@@ -10,12 +10,6 @@ const filters = {
 
 const initialState = {
   list: [
-    // {
-    //   term_ar: 'الدائرة',
-    //   term_description_ar: 'وصف الدائرة',
-    //   term_description_en: 'Circle Descritions',
-    //   term_en: 'Circle',
-    // }
   ],
   details: null,
   pagination: {
@@ -29,32 +23,32 @@ const initialState = {
 
 export default (state = initialState, { type, payload, pushArray }) => {
   switch (type) {
-    case 'GET_MATHWORDS':
+    case 'GET_SUGGESTION_LINKS':
       return {
         ...state,
         fetching: true,
       };
   
-    case 'GET_MATHWORDS_FULFILLED':
-      const { pagination, mathwords } = payload.data;
-      const terms = pushArray ? [
+    case 'GET_SUGGESTION_LINKS_FULFILLED':
+      const { pagination, suggestion_links } = payload.data;
+      const list = pushArray ? [
         ...state.list,
-        ...mathwords,
-      ] : mathwords;
+        ...suggestion_links,
+      ] : suggestion_links;
       return {
         ...state,
         fetching: false,
-        list: terms,
+        list,
         pagination,
         error: '',
       }
   
-    case 'GET_MATHWORDS_REJECTED':
-    return {
-        ...state,
-        fetching: false,
-        error: payload,
-      }
+    case 'GET_SUGGESTION_LINKS_REJECTED':
+      return {
+          ...state,
+          fetching: false,
+          error: payload,
+        }
 
     default:
       return state;

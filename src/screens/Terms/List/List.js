@@ -14,6 +14,7 @@ import FeedBack from '../../../components/FeedBack';
 import ExpertTeachers from '../../../components/ExpertTeachers';
 import HotelFilters from '../../../components/HotelFilters';
 import Paragraph from '../../../components/atom/Paragraph';
+import { COLORS } from '../../../helpers/ui';
 
 export default class List extends Component {
   static navigationOptions = () => {
@@ -32,13 +33,8 @@ export default class List extends Component {
   }
 
   handleGetList = (params, pushArray) => {
-    const { getList, filters, } = this.props;
-    const newParams = {
-      ...params,
-      ...filters,
-      limit: 3,
-    };
-    getList(newParams, pushArray);
+    const { getList, } = this.props;
+    getList(params, pushArray);
   }
 
   handleEndReached = () => {

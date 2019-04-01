@@ -19,6 +19,9 @@ import thunk from 'redux-thunk';
 import termsReducer from './terms/reducer';
 import applicationsReducer from './applications/reducer';
 import localesReducer from './locales/reucer';
+import expertTeachersReducer from './expertsTeachers/reducer';
+import testsitesReducer from './testsites/reducer';
+import suggestionLinksReducer from './suggestionLinks/reducer';
 
 import AppNavigator from '../routes';
 
@@ -28,7 +31,10 @@ const appReducer = combineReducers({
   nav: navReducer,
   terms: termsReducer,
   applications: applicationsReducer,
+  testsites: testsitesReducer,
+  suggestionLinks: suggestionLinksReducer,
   locales: localesReducer,
+  teacher: expertTeachersReducer,
 });
 
 // Note: createReactNavigationReduxMiddleware must be run before reduxifyNavigator

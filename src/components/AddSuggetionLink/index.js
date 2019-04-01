@@ -3,20 +3,23 @@ import {
   TouchableHighlight,
   StyleSheet,
   Text,
+  View,
   TextInput,
   Alert,
 } from 'react-native';
-import * as Animatable from 'react-native-animatable'
 import Icon from 'react-native-vector-icons/Feather';
+import { I18n } from 'react-redux-i18n';
+import { connect } from 'react-redux';
 import Modal from '../Modal';
 import Button from '../atom/Button';
 import { COLORS } from '../../helpers/ui';
-import Api from '../../helpers/api';
+import { createItem } from '../../redux/suggestionLinks/actionCreators';
 
-export default class Main extends Component {
+class AddSuggetionLink extends Component {
   defaultParams = {
-    title: '',
-    content: '',
+    title_ar: '',
+    title_en: '',
+    url: '',
     error: '',
   };
   state = {
@@ -31,37 +34,40 @@ export default class Main extends Component {
   }
 
   handleSubmit = () => {
-    const { title, content } = this.state;
-    if (!title || !content) return this.setState({ error: 'Please fill the two fields' })
-    Api.post('feedbacks', { title, description: content })
-    .then(({ data: { message }}) => { Alert.alert(message); this.toggleModal() })
-    .catch(error => Alert.error(error))
+    const { title_ar, title_en, url } = this.state;
+    if (!title_ar || !title_en || !url) return this.setState({ error: 'Please fill fields' })
+    this.props.createSuggestionLink({ title_ar, title_en, url })
   }
+
   toggleModal = () => this.setState({ isOpen: !this.state.isOpen });
   render() {
-    const { title, content, error } = this.state;
+    const { title_ar, title_en, url, error } = this.state;
     return (
       <React.Fragment>
         <Modal
-          title="إقتراحك"
+          title={I18n.t('add_suggestion_link')}
           isOpen={this.state.isOpen}
           onClose={this.toggleModal}
         >
           <Text style={{ color: 'red' }}>{error}</Text>
           <TextInput
             style={styles.input}
-            placeholder="العنوان"
-            value={title}
+            placeholder={I18n.t('title_ar')}
+            value={title_ar}
             autoFocus
-            onChangeText={text => this.handleChange('title', text)}
+            onChangeText={text => this.handleChange('title_ar', text)}
           />
           <TextInput
-            multiline
             style={styles.input}
-            numberOfLines={5}
-            value={content}
-            placeholder="الوصف"
-            onChangeText={text => this.handleChange('content', text)}
+            placeholder={I18n.t('title_en')}
+            value={title_en}
+            onChangeText={text => this.handleChange('title_en', text)}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder={I18n.t('url')}
+            value={url}
+            onChangeText={text => this.handleChange('url', text)}
           />
           <Button
             style={styles.button}
@@ -81,14 +87,9 @@ export default class Main extends Component {
           onPress={this.toggleModal}
           style={styles.floating_action}
         >
-          <Animatable.View
-            animation="pulse"
-            easing="ease-out"
-            iterationCount="infinite"
-            duration={400}
-          >
-            <Icon color="#fff" name="message-circle" size={24} />
-          </Animatable.View>
+          <View>
+            <Icon color={COLORS.primary} name="plus" size={20} />
+          </View>
         </TouchableHighlight>
       </React.Fragment>
     )
@@ -101,14 +102,14 @@ const styles = StyleSheet.create({
     position: 'absolute',
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 60,
-    backgroundColor: COLORS.primary,
-    bottom: 5,
-    right: 10,
-    height: 50,
-    width: 50,
-    zIndex: 1000,
+    backgroundColor: '#fff',
+    borderRadius: 22.5,
+    bottom: 110,
+    right: 12.5,
+    height: 45,
+    width: 45,
     elevation: 4,
+    zIndex: 1000,
   },
   input: {
     padding: 5,
@@ -120,3 +121,10 @@ const styles = StyleSheet.create({
     width: '100%'
   }
 })
+
+const mapDispatchToProps = (dispatch) => ({
+  createSuggestionLink: (data) => dispatch(createItem(data)),
+});
+
+export default connect(null, mapDispatchToProps)(AddSuggetionLink);
+

@@ -33,18 +33,18 @@ const initialState = {
 
 export default (state = initialState, { type, payload, pushArray }) => {
   switch (type) {
-    case 'GET_APPLICATION':
+    case 'GET_TEACHERS':
       return {
         ...state,
         fetching: true,
       };
   
-    case 'GET_APPLICATION_FULFILLED':
-      const { pagination, applications } = payload.data;
+    case 'GET_TEACHERS_FULFILLED':
+      const { pagination, teachers } = payload.data;
       const list = pushArray ? [
         ...state.list,
-        ...applications,
-      ] : applications;
+        ...teachers,
+      ] : teachers;
       return {
         ...state,
         fetching: false,
@@ -53,7 +53,7 @@ export default (state = initialState, { type, payload, pushArray }) => {
         error: '',
       }
   
-    case 'GET_APPLICATION_REJECTED':
+    case 'GET_TEACHERS_REJECTED':
     return {
         ...state,
         fetching: false,

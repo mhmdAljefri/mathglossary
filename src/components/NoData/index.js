@@ -2,41 +2,47 @@ import React from 'react';
 import {
   View,
   Text,
-  TouchableWithoutFeedback,
+  TouchableNativeFeedback,
   ActivityIndicator
 } from 'react-native';
-import * as Animatable from 'react-native-animatable';
 import { I18n } from 'react-redux-i18n';
 import { COLORS } from '../../helpers/ui';
 
-const Message = ({ onPress, message }) => (
+const Message = ({ onRefresh, message }) => (
   <View style={{ flex: 2, flexDirection: 'column', justifyContent: 'center', alignItems: 'center', }}>
-    <Text style={{ fontWeight: 'bold', fontSize: 22 }}>المعذرة يوجد خطاء</Text>
-    <Text
-      style={{ color: '#b52424' }}
-    >{message}</Text>
-    <TouchableWithoutFeedback
-      onPress={onPress}
+    {!!message  ? (
+      <React.Fragment>
+        <Text style={{ fontWeight: 'bold', fontSize: 22 }}>المعذرة يوجد خطاء</Text>
+        <Text
+          style={{ color: '#b52424' }}
+        >
+          {message}
+        </Text>
+      </React.Fragment>)
+      : (
+        <React.Fragment>
+          <Text>{I18n.t('no_data')}</Text>
+        </React.Fragment>
+    )}
+    <TouchableNativeFeedback
+      onPress={() => console.log({onRefresh})}
     >
-      <Animatable.Text
-        direction="alternate"
-        animation="pulse"
-        iterationCount="infinite"
-        easing="ease-out"
+      <View
         style={{
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           textAlign: 'center',
           marginVertical: 20,
-          backgroundColor: '#eee',
+          color: COLORS.primary,
+          elevation: .5,
           width: 150,
           height: 30,
           lineHeight: 30,
           borderRadius: 15,
         }}
-      >{I18n.t('تحديث')}</Animatable.Text>
-    </TouchableWithoutFeedback>
+      ><Text>{I18n.t('refresh')}</Text></View>
+    </TouchableNativeFeedback>
   </View>
 )
 

@@ -2,6 +2,8 @@ import React from 'react'
 // import PropTypes from 'prop-types';
 import { Text, TouchableHighlight, StyleSheet } from 'react-native';
 import { COLORS } from '../../../helpers/ui';
+import { View } from 'react-native-animatable';
+import { I18n } from 'react-redux-i18n';
 
 // Button.propTypes = {
 //   color: PropTypes.checkPropTypes(PropTypes.oneOf([
@@ -24,7 +26,7 @@ const Button = ({ text, style, color, ...props }) => {
         backgroundColor,
       }}
     >
-      <Text style={{ color: fontColor }}>{text}</Text>
+      <View style={{ color: fontColor }}><Text>{I18n.t(text)}</Text></View>
     </TouchableHighlight>
   );
 }
@@ -36,6 +38,7 @@ const styles = StyleSheet.create({
     margin: 5,
     height: 40,
     borderRadius: 20,
+    overflow: 'hidden',
     padding: 10,
   },
 })
@@ -48,7 +51,7 @@ function switchColor(color) {
     case 'primary':
     case 'secondry':
     case 'dark':
-      return '#eee';  
+      return '#fff';  
     default:
       return "#555";
   }

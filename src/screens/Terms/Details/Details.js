@@ -10,7 +10,7 @@ import Paragraph from '../../../components/atom/Paragraph';
 
 export default class HotelDetails extends Component {
   static navigationOptions = {
-    headerTitle: () => <HeaderTitle title={I18n.t('hotel')} />
+    headerTitle: () => <HeaderTitle title={I18n.t('terms')} />
   }
 
   componentDidMount() {
@@ -22,7 +22,7 @@ export default class HotelDetails extends Component {
   }
 
   handleBackPress = () => {
-    this.props.navigation.navigate('Hotels')
+    this.props.navigation.navigate('Terms')
     return true;
   }
 
@@ -36,7 +36,7 @@ export default class HotelDetails extends Component {
         <View style={{ flex: 1, padding: 10, justifyContent: 'center', alignItems: 'center', }}>
           <Paragraph color="primary" bold>{data[`term_${currentLang}`]}</Paragraph>
           <Paragraph bold>{data[`term_${toTransateLang}`]}</Paragraph>
-          <Paragraph>{data[`term_description_${currentLang}`]}</Paragraph>
+          <Paragraph center>{data[`term_description_${currentLang}`]}</Paragraph>
         </View>
       </Continer>
     )

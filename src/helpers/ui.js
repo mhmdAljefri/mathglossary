@@ -22,6 +22,9 @@ export const getLoacle = async () => {
 
 
 export const COLORS = {
-  primary: '#387b94',
-  secondry: '#575989'
+  primary: '#71102D',
+  secondry: '#8F0C32',
+  background: '#F4F3F4',
+  light: '#A5A7A6',
+  dark: '#5A5B5A',
 };
