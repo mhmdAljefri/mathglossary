@@ -1,4 +1,5 @@
 import React from 'react';
+import { Text } from 'react-native';
 import { loadTranslations, setLocale } from 'react-redux-i18n';
 import { getLoacle } from './helpers/ui';
 import { setAppLocale } from './redux/locales/actionCreators'
@@ -9,6 +10,7 @@ import {
   reduxifyNavigator,
 } from 'react-navigation-redux-helpers';
 import { Provider, connect } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react'
 
 import ar from './translations/ar';
 import en from './translations/en';
@@ -16,14 +18,14 @@ import en from './translations/en';
 import './helpers/api';
 
 import AppNavigator from './routes';
-import store from './redux/store';
+import storeCreatore from './redux/store';
+
+const { store, persistor } = storeCreatore();
 
 const App = reduxifyNavigator(AppNavigator, "root");
 const mapStateToProps = (state) => ({
   state: state.nav,
 });
-
-
 
 (getDeviceLocale = () => {
   getLoacle().then((i18n) => {
@@ -40,6 +42,8 @@ const AppWithNavigationState = connect(mapStateToProps)(App);
 
 export default () => (
   <Provider store={store} >
-    <AppWithNavigationState />
+    <PersistGate loading={<Text>...</Text>} persistor={persistor}>
+      <AppWithNavigationState />
+    </PersistGate>
   </Provider>
 )

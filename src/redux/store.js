@@ -6,6 +6,9 @@ import {
   compose,
 } from 'redux';
 
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage' // defaults to localStorage for web and AsyncStorage for react-native
+
 import {
   createReactNavigationReduxMiddleware,  
   createNavigationReducer,
@@ -24,6 +27,11 @@ import testsitesReducer from './testsites/reducer';
 import suggestionLinksReducer from './suggestionLinks/reducer';
 
 import AppNavigator from '../routes';
+
+const persistConfig = {
+  key: 'main',
+  storage,
+}
 
 const navReducer = createNavigationReducer(AppNavigator);
 const appReducer = combineReducers({
@@ -47,11 +55,16 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const middlewaresContiner = [middleware, promise, thunk]
 
-const store = createStore(
-  appReducer,
-  composeEnhancers(applyMiddleware(...middlewaresContiner)),
-);
+const persistedReducer = persistReducer(persistConfig, appReducer)
 
-syncTranslationWithStore(store)
+export default () => {
+  const store = createStore(
+    persistedReducer,
+    composeEnhancers(applyMiddleware(...middlewaresContiner)),
+  );
+  const persistor = persistStore(store)
+  syncTranslationWithStore(store)
+  return { store, persistor };
+}
 
-export default store;
+

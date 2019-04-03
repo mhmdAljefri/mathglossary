@@ -23,12 +23,11 @@ import { COLORS } from '../../../helpers/ui';
 export default class List extends Component {
   renderListItem = ({item}) => {
     const currentLocale = this.props.locale === 'ar' ? 'ar' : 'en';
-    const url = item[`url_${currentLocale}`]
+    const url = item.url
     return (
       <View style={{ flexDirection: 'row', margin: 10, padding: 10, elevation: 2, borderRadius: 15, backgroundColor: '#eee', display: 'flex', justifyContent: 'space-between', alignItems: 'center', }}>
         <View>
-          <Text>{item[`name_${currentLocale}`]}</Text>
-          <Text>{item[`description_${currentLocale}`]}</Text>
+          <Text>{item[`title_${currentLocale}`]}</Text>
         </View>
         <TouchableNativeFeedback onPress={() => this.showDetails(url)}>
           <View><Icon color={COLORS.primary} size={24} name="external-link" /></View>

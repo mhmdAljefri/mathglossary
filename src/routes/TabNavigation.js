@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/Feather';
 import { COLORS } from '../helpers/ui';
 import TermsStack from '../screens/Terms';
 import ApplicationsStack from '../screens/Applications';
+import ProfileStack from '../screens/Profile';
 import TestsitesStack from '../screens/Testsites';
 import SuggestionLinksStack from '../screens/SuggestionLinks'
 import { I18n } from 'react-redux-i18n';
@@ -66,7 +67,7 @@ export default createBottomTabNavigator(
       }),
     },
     Profile: {
-      screen: ApplicationsStack,
+      screen: ProfileStack,
       navigationOptions: () => ({
         tabBarLabel: I18n.t('profile'),
         tabBarIcon: ({ tintColor }) => (

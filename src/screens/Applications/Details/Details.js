@@ -24,7 +24,7 @@ export default class HotelDetails extends Component {
   }
 
   handleBackPress = () => {
-    this.props.navigation.navigate('Hotels')
+    this.props.navigation.navigate('Applications')
     return true;
   }
 

@@ -6,11 +6,13 @@ import TabStack from './TabNavigation';
 
 // Screeens
 import SplashScreen from '../screens/Splash';
+import AuthSwitch from '../screens/AuthScreens';
 
 export default createSwitchNavigator(
   {
     AuthLoading: SplashScreen,
-    Auth: TabStack,
+    AuthSwitch,
+    TabStack,
   },
   {
     initialRouteName: 'AuthLoading',
