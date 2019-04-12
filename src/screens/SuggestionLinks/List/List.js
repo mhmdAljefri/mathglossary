@@ -47,7 +47,6 @@ export default class List extends Component {
   };
 
   componentDidMount() {
-    console.log('fet')
     this.handleGetList()
   }
 
@@ -87,10 +86,10 @@ export default class List extends Component {
         <HeaderFilter
           onPressSearchDone={this.handleGetList}
           onPressFilter={this.toggleModal}
-          title={I18n.t('testsites')}
+          title={I18n.t('suggestion_links')}
         />
         <Paragraph style={{ padding: 50, textAlign: 'center', fontSize: 22 }}>
-          {I18n.t('testsites_description')}
+          {I18n.t('suggestion_links_description')}
         </Paragraph>
         {(_.isEmpty(list)) ?
           <NoData

@@ -25,12 +25,15 @@ import localesReducer from './locales/reucer';
 import expertTeachersReducer from './expertsTeachers/reducer';
 import testsitesReducer from './testsites/reducer';
 import suggestionLinksReducer from './suggestionLinks/reducer';
+import loginReducer from './login/reducer';
+import registerReducer from './register/reducer';
 
 import AppNavigator from '../routes';
 
 const persistConfig = {
   key: 'main',
   storage,
+  blacklist: ['nav'] // navigation will not be persisted
 }
 
 const navReducer = createNavigationReducer(AppNavigator);
@@ -43,6 +46,9 @@ const appReducer = combineReducers({
   suggestionLinks: suggestionLinksReducer,
   locales: localesReducer,
   teacher: expertTeachersReducer,
+
+  login: loginReducer,
+  register: registerReducer,
 });
 
 // Note: createReactNavigationReduxMiddleware must be run before reduxifyNavigator

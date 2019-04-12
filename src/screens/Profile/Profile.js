@@ -3,10 +3,12 @@ import {
   View,
   Image,
   ScrollView,
+  TouchableNativeFeedback,
   StyleSheet,
 } from 'react-native'
 import * as Animatable from 'react-native-animatable'
 import Icon from 'react-native-vector-icons/Feather';
+import { withNavigation } from 'react-navigation'
 
 import { I18n } from 'react-redux-i18n';
 import Paragraph from '../../components/atom/Paragraph';
@@ -65,10 +67,17 @@ const style = StyleSheet.create({
     borderRadius: 50,
     elevation: 6,
   },
-})
+});
 
-export default class Profile extends React.PureComponent {
+class Profile extends React.Component {
+  handleLogout = () => {
+    console.log('logout clicked')
+    this.props.onLogout();
+    this.props.navigation.navigate('Profile')
+  }
   render() {
+    const { data, onLogout } = this.props;
+    
     return (
       <View style={style.container}>
         <ScrollView>
@@ -77,21 +86,27 @@ export default class Profile extends React.PureComponent {
             delay={2000}
             style={style.header}
           >
-            <Icon style={style.logout} color="#fff" size={24} name="log-out" />
+            <TouchableNativeFeedback style={style.logout} onPress={this.handleLogout}>
+              <View>
+                <Icon color="#fff" size={24} name="log-out" />
+              </View>
+            </TouchableNativeFeedback>
             <Image source={logo} style={{ width: '100%', resizeMode: 'cover', opacity: .05 }}/>
             <View style={style.info}>
               <View style={style.imageContainer}>
                 <Image source={logo} style={{ width: 100, height: 100, resizeMode: 'cover' }} />
               </View>
-              <Paragraph bold>{I18n.t('profile')}</Paragraph>
+              <Paragraph bold>{data.name}</Paragraph>
             </View>
           </Animatable.View>
           <View>
-            <LabeldIcon icon="mail" label="algfry12@gmail.com" />
-            <LabeldIcon icon="phone" label="737048111" />
+            <LabeldIcon icon="mail" label={data.email} />
+            <LabeldIcon icon="phone" label={data.mobile} />
           </View>
         </ScrollView>
       </View>
     )
   }
 }
+
+export default withNavigation(Profile);

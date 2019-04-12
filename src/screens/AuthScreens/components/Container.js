@@ -85,7 +85,10 @@ class Container extends React.Component {
   handleSubmit = () => {
     this.setState({ fetching: true })
     return this.props.onSubmit(this.form)
-      .then(() => this.setState({ fetching: false }))
+      .then((res) => {
+        this.setState({ fetching: false })
+        this.props.navigation.navigate('Profile')
+      })
       .catch(() => this.setState({ fetching: false }))
   }
 
@@ -93,9 +96,9 @@ class Container extends React.Component {
 
   render() {
     const linksListComponents = {
-      forget: () => <Button onPress={this.handleClickForget} text="forget" />,
-      registration: () => <Button onPress={this.handleClickRegistration} text="registration" />,
-      login: () => <Button onPress={this.handleClickLogin} text="login" />
+      forget: () => <Button key={1} onPress={this.handleClickForget} text="forget" />,
+      registration: () => <Button key={2} onPress={this.handleClickRegistration} text="registration" />,
+      login: () => <Button key={3} onPress={this.handleClickLogin} text="login" />
     }
   
     const {
@@ -104,7 +107,6 @@ class Container extends React.Component {
       formFields = [],
       buttons = [],
       
-      onSubmit = () => {},
     } = this.props;
     const { fetching } = this.state;
     return (
@@ -114,8 +116,8 @@ class Container extends React.Component {
             <Icon onPress={this.handleBack} name="arrow-left" color="#fff" size={24} style={styles.backButton} />
             <ScrollView style={{ marginBottom: 50 }}>
               <Text style={styles.header}>{I18n.t(title)}</Text>
-              {formFields.map(({ icon, placeholder, key, ...props }) => (
-                <InputWithIcon onChangeText={(value) => this.setFormField({ key, value })} key={key} icon={icon} placeholder={placeholder} {...props} />
+              {formFields.map(({ icon, placeholder, key, ...props }, index) => (
+                <InputWithIcon onChangeText={(value) => this.setFormField({ key, value })} key={index} icon={icon} placeholder={I18n.t(placeholder)} {...props} />
               ))}
   
             <View style={{ marginHorizontal: 20, marginVertical: 50, }}>
@@ -128,8 +130,8 @@ class Container extends React.Component {
                 }}
                 disabled={fetching}
                 style={styles.loginBtn}
-                text={submitText}
-                onPress={onSubmit}
+                text={fetching ? '...' : submitText}
+                onPress={this.handleSubmit}
               />
             </View>
   

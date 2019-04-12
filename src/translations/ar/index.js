@@ -2,8 +2,10 @@ export default  {
   // A
   app_name: 'ديار',
   applications: 'التطبيقات',
+  adee_suggestion_link: 'إضافة رابط',
   // B
   // C
+  clear: 'تصفية',
   // D
   // E
   email: 'البريد',
@@ -35,6 +37,9 @@ export default  {
   // S
   submit: 'تاكيد',
   somthing_goes_wrong: 'هنالك خلل ما!',
+  suggestion_links: 'الروابط المقترحة',
+  suggestion_links_description: 'شرح الروابط المقترحة',
+  search_hint: 'أكتب للبحث...',
   // T
   translate_any_math_term: 'ترجمات مصطلحات الرياضيات',
   terms: 'المصطلحات',

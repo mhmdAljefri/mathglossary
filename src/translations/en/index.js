@@ -2,8 +2,10 @@ export default  {
   // A
   app_name: 'Diar',
   applications: 'Applications',
+  add_suggestion_link: 'Add Suggestion Link',
   // B
   // C
+  clear: 'Clear',
   // D
   // E
   email: 'Email',
@@ -36,10 +38,15 @@ export default  {
   // S
   somthing_goes_wrong: 'Somthing goes wrong',
   submit: 'Submit',
+  suggestion_links: 'Suggestion Links',
+  suggestion_links_description: 'Suggestion Links Description',
+  search_hint: 'Search about...',
   // T
   translate_any_math_term: 'Translate Any Math Glossary',
   terms: 'Terms',
   test_sites: 'Test sites',
+  title_ar: '',
+  title_en: '',
   // U
   url: 'Enter url like https://math.app',
   user_name: 'Type your name here',

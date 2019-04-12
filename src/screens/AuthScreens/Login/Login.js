@@ -1,11 +1,12 @@
 import React from 'react';
 import Continer from '../components/Container';
 
-const Login = () => {
-  const handleLogin = (values) => console.log({values});
+const Login = ({ signin }) => {
+  const handleLogin = (values) => signin(values);
+
   const formFields = [
-    { key: 'email', icon: 'user', pleaceholder: 'user_email', autoFocuse: true, keyboardType: 'email' },
-    { key: 'password', icon: 'lock', pleaceholder: 'user_password', secureTextEntry: true },
+    { key: 'email', icon: 'user', placeholder: 'user_email', autoFocuse: true, keyboardType: 'email-address' },
+    { key: 'password', icon: 'lock', placeholder: 'user_password', secureTextEntry: true },
   ];
   return (
     <Continer
@@ -17,7 +18,7 @@ const Login = () => {
         'registration',
       ]}
     />
-  )
+  );
 };
 
 export default Login;

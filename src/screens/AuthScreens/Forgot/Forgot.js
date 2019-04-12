@@ -11,7 +11,7 @@ const Forgot = () => {
   const handleSuccess = () => Alert.alert(I18n.t('you_will_recive_email'))
   const handleError = () => Alert.alert(I18n.t('somthing_goes_wrong'))
   const formFields = [
-    { key: 'email', icon: 'mail', pleaceholder: 'user_email', autoFocuse: true, keyboardType: 'email' },
+    { key: 'email', icon: 'mail', placeholder: 'user_email', autoFocuse: true, keyboardType: 'email-address' },
   ];
   return (
     <Continer
