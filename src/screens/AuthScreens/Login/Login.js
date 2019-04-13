@@ -1,8 +1,12 @@
 import React from 'react';
+import { Alert } from 'react-native';
+import { I18n } from 'react-redux-i18n';
 import Continer from '../components/Container';
 
 const Login = ({ signin }) => {
-  const handleLogin = (values) => signin(values);
+  const handleLogin = (values) => signin(values).catch(handleError);
+
+  const handleError = () => Alert.alert(I18n.t('somthing_goes_wrong'))
 
   const formFields = [
     { key: 'email', icon: 'user', placeholder: 'user_email', autoFocuse: true, keyboardType: 'email-address' },

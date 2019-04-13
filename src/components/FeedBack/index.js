@@ -7,6 +7,7 @@ import {
   Alert,
 } from 'react-native';
 import * as Animatable from 'react-native-animatable'
+import { I18n } from 'react-redux-i18n';
 import Icon from 'react-native-vector-icons/Feather';
 import Modal from '../Modal';
 import Button from '../atom/Button';
@@ -43,14 +44,14 @@ export default class Main extends Component {
     return (
       <React.Fragment>
         <Modal
-          title="إقتراحك"
+          title={I18n.t('feedback')}
           isOpen={this.state.isOpen}
           onClose={this.toggleModal}
         >
           <Text style={{ color: 'red' }}>{error}</Text>
           <TextInput
             style={styles.input}
-            placeholder="العنوان"
+            placeholder={I18n.t('title')}
             value={title}
             autoFocus
             onChangeText={text => this.handleChange('title', text)}
@@ -60,7 +61,7 @@ export default class Main extends Component {
             style={styles.input}
             numberOfLines={5}
             value={content}
-            placeholder="الوصف"
+            placeholder={I18n.t('description')}
             onChangeText={text => this.handleChange('content', text)}
           />
           <Button

@@ -52,11 +52,8 @@ const style = StyleSheet.create({
     alignItems: 'center',
   },
   logout: {
+    alignSelf: 'flex-end',
     padding: 10,
-    margin: 5,
-    position: 'absolute',
-    top: 0,
-    right: 0,
   },
   imageContainer: {
     height: 100,
@@ -86,11 +83,9 @@ class Profile extends React.Component {
             delay={2000}
             style={style.header}
           >
-            <TouchableNativeFeedback style={style.logout} onPress={this.handleLogout}>
-              <View>
-                <Icon color="#fff" size={24} name="log-out" />
-              </View>
-            </TouchableNativeFeedback>
+            <View style={style.logout}>
+              <Icon  onPress={this.handleLogout} color="#fff" size={24} name="log-out" />
+            </View>
             <Image source={logo} style={{ width: '100%', resizeMode: 'cover', opacity: .05 }}/>
             <View style={style.info}>
               <View style={style.imageContainer}>

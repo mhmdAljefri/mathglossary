@@ -1,17 +1,20 @@
 export default  {
   // A
-  app_name: 'ديار',
+  app_name: 'مصطلحات الرياضيات',
   applications: 'التطبيقات',
   adee_suggestion_link: 'إضافة رابط',
   // B
   // C
   clear: 'تصفية',
   // D
+  description: 'الوصف',
   // E
   email: 'البريد',
   expert_teachers: 'ملعمين ذوي خبرة',
   // F
-  forget: 'سنيت كلمة السر؟',
+  feedback: 'الاقتراحات',
+  forget: 'نسيت كلمة السر؟',
+  forget_title: 'نسيت كلمة السر',
   // G
   // H
   // I
@@ -32,7 +35,7 @@ export default  {
   // Q
   // R
   refresh: 'تحديث البيانات',
-  registartion: 'إنشاء حساب',
+  registration: 'إنشاء حساب',
   registration_title: 'إنشاء حساب',
   // S
   submit: 'تاكيد',
@@ -41,10 +44,14 @@ export default  {
   suggestion_links_description: 'شرح الروابط المقترحة',
   search_hint: 'أكتب للبحث...',
   // T
+  task_done: 'تمت العملية بنجاح',
   translate_any_math_term: 'ترجمات مصطلحات الرياضيات',
   terms: 'المصطلحات',
-  test_sites: 'مواقع الاختبار',
+  testsites: 'مواقع الاختبار',
   testsites_description: 'إختبر نسبة مهاراتك ',
+  title_ar: 'العنوان العربي',
+  title_en: 'العنوان الانجليزي',
+  title: 'العنوان',
   // U
   url: 'ادخل لرابط مثل https://math.app',
   user_name: 'أكتب اسمك هنا',

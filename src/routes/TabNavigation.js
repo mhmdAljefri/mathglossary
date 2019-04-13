@@ -43,7 +43,7 @@ export default createBottomTabNavigator(
     Testsites: {
       screen: TestsitesStack,
       navigationOptions: () => ({
-        tabBarLabel: I18n.t('test_sites'),
+        tabBarLabel: I18n.t('testsites'),
         tabBarIcon: ({ tintColor }) => (
           <Icon
             name="check-square"

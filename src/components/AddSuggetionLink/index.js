@@ -36,7 +36,12 @@ class AddSuggetionLink extends Component {
   handleSubmit = () => {
     const { title_ar, title_en, url } = this.state;
     if (!title_ar || !title_en || !url) return this.setState({ error: 'Please fill fields' })
-    this.props.createSuggestionLink({ title_ar, title_en, url: url.toLowerCase() }).catch(Alert.alert)
+    this.props.createSuggestionLink({ title_ar, title_en, url: url.toLowerCase() })
+    .then(() => {
+      Alert.alert(I18n.t('task_done'))
+      this.toggleModal();
+    })
+    .catch(Alert.alert)
   }
 
   toggleModal = () => this.setState({ isOpen: !this.state.isOpen });

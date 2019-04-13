@@ -1,4 +1,6 @@
 import React from 'react';
+import { Alert } from 'react-native';
+import { I18n } from 'react-redux-i18n';
 import Container from '../components/Container';
 
 const Register = ({signup}) => {
@@ -9,7 +11,8 @@ const Register = ({signup}) => {
     { icon: 'lock', key: 'password', placeholder: 'user_password' },
   ];
 
-  const handleRegister = (values) => signup(values);
+  const handleRegister = (values) => signup(values).catch(handleError);
+  const handleError = () => Alert.alert(I18n.t('somthing_goes_wrong'))
 
   return (
     <Container

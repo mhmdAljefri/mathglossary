@@ -27,9 +27,10 @@ const mapStateToProps = (state) => ({
   state: state.nav,
 });
 
-(getDeviceLocale = () => {
+(() => {
   getLoacle().then((i18n) => {
-    const locale = i18n || 'ar'
+    const locale = i18n || 'en'
+    console.log({locale})
     Axios.defaults.headers.locale = locale;
 
     store.dispatch(setAppLocale(locale)); // To use it on the rest of this Application

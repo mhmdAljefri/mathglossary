@@ -4,14 +4,16 @@ import Icon from 'react-native-vector-icons/Feather';
 import { I18n } from 'react-redux-i18n';
 
 export default class Searchbar extends Component {
+  state = { search: '' }
   componentWillUnmount() {
-    clearTimeout(this.timer)    
+    clearTimeout(this.timer)
   }
 
   timer = null
   handleTextChange = (data) => {
     clearTimeout(this.timer)
     const key = this.props.name || 'search';
+    this.props.onChangeText(data);
     this.timer = setTimeout(() => this.props.onSubmit({ [key]: data }), 1500)
   }
 

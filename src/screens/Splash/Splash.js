@@ -7,7 +7,6 @@ import {
   StyleSheet,
 } from 'react-native'
 import * as Animatable from 'react-native-animatable'
-
 import logo from '../../assets/img/zayed_uni.jpg'
 import { I18n } from 'react-redux-i18n';
 
@@ -25,7 +24,7 @@ const style = StyleSheet.create({
   }
 })
 
-export default class Splash extends React.PureComponent {
+class Splash extends React.PureComponent {
   timer = null
   componentDidMount() {
     this.timer = setTimeout(() => this.props.navigation.navigate('Terms'), 5000)
@@ -51,3 +50,5 @@ export default class Splash extends React.PureComponent {
     )
   }
 }
+
+export default Splash;

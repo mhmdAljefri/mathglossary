@@ -47,7 +47,6 @@ export default class List extends Component {
   };
 
   componentDidMount() {
-    console.log('fet')
     this.handleGetList()
   }
 

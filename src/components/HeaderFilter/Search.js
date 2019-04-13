@@ -20,6 +20,7 @@ export default  class Search extends React.Component {
   }
 
   state = {
+    search: null,
     isVisible: false,
   }
 
@@ -53,7 +54,7 @@ export default  class Search extends React.Component {
           <TouchableWithoutFeedback style={{ width: BACK_BUTTON_WIDTH }}>
             <MyIcon color="#fff" name="x" style={styles.icon} onPress={onPress} />
           </TouchableWithoutFeedback>
-          <SearchBar autoFocus color="#fff" style={styles.searchBar} onSubmit={onSubmit} />
+          <SearchBar value={this.state.search} onChangeText={search => this.setState({ search })} autoFocus color="#fff" style={styles.searchBar} onSubmit={onSubmit} />
         </Animatable.View>
       ) : ( null )
     );

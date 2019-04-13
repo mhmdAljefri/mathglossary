@@ -7,10 +7,12 @@ export default  {
   // C
   clear: 'Clear',
   // D
+  description: 'Description',
   // E
   email: 'Email',
   expert_teachers: 'Experts Teachers',
   // F
+  feedback: 'Feedback',
   forget: 'Forget password?',
   forget_title: 'Forget password',
   // G
@@ -42,11 +44,14 @@ export default  {
   suggestion_links_description: 'Suggestion Links Description',
   search_hint: 'Search about...',
   // T
+  task_done: 'Task done',
   translate_any_math_term: 'Translate Any Math Glossary',
   terms: 'Terms',
-  test_sites: 'Test sites',
-  title_ar: '',
-  title_en: '',
+  testsites: 'Test sites',
+  testsites_description: 'Test your skills on fly',
+  title_ar: 'Title ar',
+  title_en: 'Title en',
+  title: 'Title',
   // U
   url: 'Enter url like https://math.app',
   user_name: 'Type your name here',

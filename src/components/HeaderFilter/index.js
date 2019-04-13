@@ -4,16 +4,13 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableHighlight,
-  Image,
 } from 'react-native';
 import { getFullWidth } from "../../helpers/ui";
-import logo from '../../assets/img/diar_30px.jpg';
 import { COLORS } from '../../helpers/ui';
 import Search from './Search';
 import MyIcon from './MyIcon';
 import { withNavigation } from 'react-navigation';
-import { I18n } from 'react-i18nify';
+import { I18n } from 'react-redux-i18n';
 
 const BACK_BUTTON_WIDTH = 60;
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  Alert,
   View,
   ScrollView,
   Text,
@@ -7,6 +8,7 @@ import {
   ImageBackground,
   TouchableNativeFeedback,
 } from 'react-native';
+import { connect } from 'react-redux';
 import { withNavigation } from 'react-navigation'
 import * as Animatable from 'react-native-animatable';
 import Icon from 'react-native-vector-icons/Feather';
@@ -19,17 +21,15 @@ import InputWithIcon from './InputWithIcon';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 50,
     backgroundColor: 'rgba(0,0,0, .5)',
     justifyContent: 'center',
     position: 'relative',
   },
   backButton: {
+    width: 50,
     padding: 10,
+    alignSelf: 'flex-end',
     margin: 5,
-    position: 'absolute',
-    top: 0,
-    left: 0,
   },
   imageBackground: {
     width: '100%',
@@ -85,11 +85,13 @@ class Container extends React.Component {
   handleSubmit = () => {
     this.setState({ fetching: true })
     return this.props.onSubmit(this.form)
-      .then((res) => {
-        this.setState({ fetching: false })
-        this.props.navigation.navigate('Profile')
-      })
-      .catch(() => this.setState({ fetching: false }))
+        .then(() => {
+          this.setState({ fetching: false })
+          this.props.navigation.navigate('Profile')
+        })
+        .catch(() => {
+          this.setState({ fetching: false })
+        })
   }
 
   setFormField = ({ value, key }) => this.form = {...this.form, [key]: value};
@@ -106,14 +108,15 @@ class Container extends React.Component {
       submitText = 'submit',
       formFields = [],
       buttons = [],
-      
+      locale,
     } = this.props;
     const { fetching } = this.state;
+    const arrowDirection = locale === 'ar' ? 'right' : 'left';
     return (
       <Animatable.View animation="slideInRight" >
         <ImageBackground source={BG} style={styles.imageBackground} >
           <View style={styles.container}>
-            <Icon onPress={this.handleBack} name="arrow-left" color="#fff" size={24} style={styles.backButton} />
+            <Icon onPress={this.handleBack} name={`arrow-${arrowDirection}`} color="#fff" size={24} style={styles.backButton} />
             <ScrollView style={{ marginBottom: 50 }}>
               <Text style={styles.header}>{I18n.t(title)}</Text>
               {formFields.map(({ icon, placeholder, key, ...props }, index) => (
@@ -151,4 +154,8 @@ class Container extends React.Component {
   }
 };
 
-export default withNavigation(Container);
+const mapStateToProps = ({ locales: { locale } }) => ({
+  locale
+});
+
+export default connect(mapStateToProps)(withNavigation(Container));
