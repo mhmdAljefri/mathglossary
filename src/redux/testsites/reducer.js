@@ -9,20 +9,7 @@ const filters = {
 };
 
 const initialState = {
-  list: [
-    {
-      name_ar: 'الدائرة',
-      name_en: 'الدائرة',
-      description_ar: 'وصف الدائرة',
-      description_en: 'Circle Descritions',
-      application_en: 'Circle',
-      application_diagram_ar: '',
-      url_en: 'https://res.cloudinary.com/djtqrzqx8/image/upload/f_auto,c_fill/v1546867683/jisr-logo.png',
-      url_ar: 'https://res.cloudinary.com/djtqrzqx8/image/upload/f_auto,c_fill/v1546867683/jisr-logo.png',
-      application_video_ar: '',
-      application_video_en: 'IQLE1U2M76s',
-    }
-  ],
+  list: [],
   details: null,
   pagination: {
     current_page: 1,

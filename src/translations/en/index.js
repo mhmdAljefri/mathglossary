@@ -24,6 +24,8 @@ export default  {
   // L
   login: 'Login',
   login_title: 'Login',
+  list_somthing: 'List something you\'ve learned ',
+  what_would_you_like: 'What would you like us to improve in the app?',
   // M
   math_is_fun: 'MATH IS FUN',
   // N
@@ -41,14 +43,14 @@ export default  {
   somthing_goes_wrong: 'Somthing goes wrong',
   submit: 'Submit',
   suggestion_links: 'Suggestion Links',
-  suggestion_links_description: 'Suggestion Links Description',
+  suggestion_links_description: 'Suggestion Link to help your friends',
   search_hint: 'Search about...',
   // T
   task_done: 'Task done',
   translate_any_math_term: 'Translate Any Math Glossary',
   terms: 'Terms',
-  testsites: 'Test sites',
-  testsites_description: 'Test your skills on fly',
+  testsites: 'Test',
+  testsites_description: 'Test your Knowladage',
   title_ar: 'Title ar',
   title_en: 'Title en',
   title: 'Title',
@@ -60,6 +62,7 @@ export default  {
   user_password: 'Type your password here',
   // V
   // W
+  what_to_improve: 'what would you like us to improve in the app?',
   // X
   // Y
   you_will_receive_email: 'You will receive an email if your write the right email',

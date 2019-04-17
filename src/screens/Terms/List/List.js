@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 
 import {
   FlatList,
+  Keyboard,
 } from 'react-native';
+import * as Animatable from 'react-native-animatable';
 import { I18n } from 'react-redux-i18n';
 import _ from 'lodash';
 import ListItem from '../../../components/ListItem';
@@ -14,7 +16,7 @@ import FeedBack from '../../../components/FeedBack';
 import ExpertTeachers from '../../../components/ExpertTeachers';
 import HotelFilters from '../../../components/HotelFilters';
 import Paragraph from '../../../components/atom/Paragraph';
-import { COLORS } from '../../../helpers/ui';
+import SearchBar from '../../../components/Searchbar';
 
 export default class List extends Component {
   static navigationOptions = () => {
@@ -26,15 +28,32 @@ export default class List extends Component {
   state = {
     isModalOpen: false,
     showSearch: false,
+    keyboardHidden: true,
+    search: '',
   };
 
-  componentDidMount() {
-    this.handleGetList()
+  componentDidMount () { 
+    this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow);
+    this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this._keyboardDidHide);
+  }
+
+  componentWillUnmount () {
+    this.keyboardDidShowListener.remove();
+    this.keyboardDidHideListener.remove();
+  }
+
+  _keyboardDidShow = () => {
+    this.setState({ keyboardHidden: false })    
+  }
+
+  _keyboardDidHide = () => {
+    this.setState({ keyboardHidden: true })
   }
 
   handleGetList = (params, pushArray) => {
     const { getList, } = this.props;
-    getList(params, pushArray);
+    const { search } = this.state
+    getList({ search, ...params }, pushArray);
   }
 
   handleEndReached = () => {
@@ -54,8 +73,11 @@ export default class List extends Component {
     this.setState(prevState => ({ isModalOpen: !prevState.isModalOpen }))
   }
 
+  wrapView = node => this.view = node;
+
   render() {
     const { fetching: refreshing, list, error } = this.props;
+    const { keyboardHidden } = this.state;
 
     return (
       <Continer main>
@@ -66,15 +88,23 @@ export default class List extends Component {
           onPressFilter={this.toggleModal}
           title={I18n.t('terms')}
         />
-        <Paragraph style={{ padding: 50, textAlign: 'center', fontSize: 22 }}>
-          {I18n.t('translate_any_math_term')}
-        </Paragraph>
-        {(_.isEmpty(list)) ?
-          <NoData
-            isFetching={refreshing}
-            message={error}
-            onRefresh={this.handleGetList}
-          /> :
+        <Animatable.View
+          ref={this.wrapView}
+          style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+        >
+          <Paragraph style={{ padding: keyboardHidden ? 50 : 5, textAlign: 'center', fontSize: 22 }}>
+            {I18n.t('translate_any_math_term')}
+          </Paragraph>
+        </Animatable.View>
+
+        <Animatable.View>
+          <SearchBar
+            name="name"
+            onChangeText={search => this.setState({ search })}
+            onSubmit={this.handleGetList}
+          />
+        {(!_.isEmpty(list)) && (
+          
           <FlatList
             refreshing={refreshing}
             onRefresh={this.handleGetList}
@@ -86,7 +116,9 @@ export default class List extends Component {
               <ListItem delay={200} onPress={() => this.showDetails(item)} textObject={{ en: item.term_en, ar: item.term_ar }} />
             )}
           />
+        )
         }
+        </Animatable.View>
         <Modal
           title={I18n.t('hotel_filters')}
           isOpen={this.state.isModalOpen}

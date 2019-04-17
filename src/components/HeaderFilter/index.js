@@ -46,10 +46,10 @@ class SearchFilter extends Component {
             <View style={styles.title}>
               <Text style={{ lineHeight: 60, fontWeight: 'bold', fontSize: 20 }}>{I18n.t(title)}</Text>
             </View>
-            <View style={styles.icons}>
+            {/* <View style={styles.icons}>
               <MyIcon color={COLORS.primary} {...this.props} onPress={this.toggleSearch} style={styles.icon} name="search" />
               <MyIcon color={COLORS.primary} {...this.props} onPress={this.navigator} style={styles.icon} name="info" />
-            </View>
+            </View> */}
           </React.Fragment>)}
       </View>
     );

@@ -31,7 +31,7 @@ const ListItem = ({ onPress, textObject = { ar: '', en: ''}, delay, animation = 
       onPress={onPress}
     >
       <Animatable.View delay={delay} animation={animation} style={style.container}>
-        <Text>{locale === 'ar' ? textObject.en : textObject.ar }</Text>
+        <Text style={{ fontSize: 18 }}>{locale === 'ar' ? textObject.en : textObject.ar }</Text>
         <MyIcon locale={locale} />
       </Animatable.View>
     </TouchableHighlight>

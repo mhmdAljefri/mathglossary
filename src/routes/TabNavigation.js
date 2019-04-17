@@ -27,19 +27,6 @@ export default createBottomTabNavigator(
         )
       }),
     },
-    Applications: {
-      screen: ApplicationsStack,
-      navigationOptions: () => ({
-        tabBarLabel: I18n.t('applications'),
-        tabBarIcon: ({ tintColor }) => (
-          <Icon
-            name="book-open"
-            size={26}
-            style={{ color: tintColor }}
-          />
-        )
-      }),
-    },
     Testsites: {
       screen: TestsitesStack,
       navigationOptions: () => ({
@@ -81,7 +68,7 @@ export default createBottomTabNavigator(
     },
   },
   {
-    order: ['Terms', 'Applications', 'Testsites', 'SuggestionLinks', 'Profile'],
+    order: ['Terms','Testsites', 'SuggestionLinks', 'Profile'],
     tabBarOptions: {
       activeTintColor: COLORS.primary,
       inactiveTintColor: COLORS.light,

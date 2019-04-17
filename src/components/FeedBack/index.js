@@ -6,6 +6,7 @@ import {
   TextInput,
   Alert,
 } from 'react-native';
+import { connect } from 'react-redux';
 import * as Animatable from 'react-native-animatable'
 import { I18n } from 'react-redux-i18n';
 import Icon from 'react-native-vector-icons/Feather';
@@ -14,7 +15,7 @@ import Button from '../atom/Button';
 import { COLORS } from '../../helpers/ui';
 import Api from '../../helpers/api';
 
-export default class Main extends Component {
+class Feedback extends Component {
   defaultParams = {
     title: '',
     content: '',
@@ -40,6 +41,7 @@ export default class Main extends Component {
   }
   toggleModal = () => this.setState({ isOpen: !this.state.isOpen });
   render() {
+    const { token, profile } = this.props;
     const { title, content, error } = this.state;
     return (
       <React.Fragment>
@@ -51,7 +53,7 @@ export default class Main extends Component {
           <Text style={{ color: 'red' }}>{error}</Text>
           <TextInput
             style={styles.input}
-            placeholder={I18n.t('title')}
+            placeholder={I18n.t('list_somthing')}
             value={title}
             autoFocus
             onChangeText={text => this.handleChange('title', text)}
@@ -61,7 +63,7 @@ export default class Main extends Component {
             style={styles.input}
             numberOfLines={5}
             value={content}
-            placeholder={I18n.t('description')}
+            placeholder={I18n.t('what_to_improve')}
             onChangeText={text => this.handleChange('content', text)}
           />
           <Button
@@ -77,20 +79,21 @@ export default class Main extends Component {
             onPress={this.handleSubmit}
           />
         </Modal>
-        
-        <TouchableHighlight
-          onPress={this.toggleModal}
-          style={styles.floating_action}
-        >
-          <Animatable.View
-            animation="pulse"
-            easing="ease-out"
-            iterationCount="infinite"
-            duration={400}
+        {!!token && !!profile.open_feedback ? (
+          <TouchableHighlight
+            onPress={this.toggleModal}
+            style={styles.floating_action}
           >
-            <Icon color="#fff" name="message-circle" size={24} />
-          </Animatable.View>
-        </TouchableHighlight>
+            <Animatable.View
+              animation="pulse"
+              easing="ease-out"
+              iterationCount="infinite"
+              duration={400}
+            >
+              <Icon color="#fff" name="message-circle" size={24} />
+            </Animatable.View>
+          </TouchableHighlight>
+          ): false}
       </React.Fragment>
     )
   }
@@ -121,3 +124,10 @@ const styles = StyleSheet.create({
     width: '100%'
   }
 })
+
+const mapStateToProps = ({login: { token, profile = {} }}) => ({
+  token,
+  profile,
+})
+
+export default connect(mapStateToProps)(Feedback)
