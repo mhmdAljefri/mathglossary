@@ -24,6 +24,7 @@ const initialState = {
   },
   fetching: false,
   error: null,
+  message: '',
   filters,
 };
 
@@ -36,7 +37,7 @@ export default (state = initialState, { type, payload, pushArray }) => {
       };
   
     case 'GET_MATHWORDS_FULFILLED':
-      const { pagination, mathwords } = payload.data;
+      const { pagination, mathwords, message } = payload.data;
       const terms = pushArray ? [
         ...state.list,
         ...mathwords,
@@ -47,6 +48,7 @@ export default (state = initialState, { type, payload, pushArray }) => {
         list: terms,
         pagination,
         error: '',
+        message,
       }
   
     case 'GET_MATHWORDS_REJECTED':

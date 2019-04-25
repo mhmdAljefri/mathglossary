@@ -6,10 +6,12 @@ export const signup = (params = {}) => dispatch => {
     type: 'REGISTER',
   })
   return Api.post('sessions/signup', params)
-  .then(response => dispatch({
+  .then(response => {
+    Alert.success(response.data.message)
+    dispatch({
     type: 'REGISTER_FULFILLED',
     payload: response,
-  })).catch((error) => {
+  })}).catch((error) => {
     Alert.alert(error || 'خطاء في التسجيل')
 
     dispatch({

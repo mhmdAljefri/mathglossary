@@ -56,6 +56,8 @@
 		157A30803EB84AD6A9312CCD /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6CE3A63527034F7FBDB34885 /* Zocial.ttf */; };
 		9630F2EEC76F4ED2B3ECD958 /* libRCTVideo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 48ECB9688A5A48D5AE67BCD7 /* libRCTVideo.a */; };
 		8DE362A4A2DB4738A12A555D /* libRCTYouTube.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F5019CF633CC472B9BA13BBF /* libRCTYouTube.a */; };
+		395F651FC37E4F5D9E5632B9 /* libRNLocalize.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B9C3E10E7644CBABA1BABD7 /* libRNLocalize.a */; };
+		58CE71CB197E4154914733A8 /* libRNLocalize-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 947C2ACE42FC4B4BB54FA46E /* libRNLocalize-tvOS.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -383,6 +385,9 @@
 		48ECB9688A5A48D5AE67BCD7 /* libRCTVideo.a */ = {isa = PBXFileReference; name = "libRCTVideo.a"; path = "libRCTVideo.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		5EA3ADEC149D41498AD43E26 /* RCTYouTube.xcodeproj */ = {isa = PBXFileReference; name = "RCTYouTube.xcodeproj"; path = "../node_modules/react-native-youtube/RCTYouTube.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		F5019CF633CC472B9BA13BBF /* libRCTYouTube.a */ = {isa = PBXFileReference; name = "libRCTYouTube.a"; path = "libRCTYouTube.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		6947C8A2A9BC4934BC0CEC38 /* RNLocalize.xcodeproj */ = {isa = PBXFileReference; name = "RNLocalize.xcodeproj"; path = "../node_modules/react-native-localize/ios/RNLocalize.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		8B9C3E10E7644CBABA1BABD7 /* libRNLocalize.a */ = {isa = PBXFileReference; name = "libRNLocalize.a"; path = "libRNLocalize.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		947C2ACE42FC4B4BB54FA46E /* libRNLocalize-tvOS.a */ = {isa = PBXFileReference; name = "libRNLocalize-tvOS.a"; path = "libRNLocalize-tvOS.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -413,6 +418,7 @@
 				4F01BC9B48504AE289BAEB72 /* libRNVectorIcons.a in Frameworks */,
 				9630F2EEC76F4ED2B3ECD958 /* libRCTVideo.a in Frameworks */,
 				8DE362A4A2DB4738A12A555D /* libRCTYouTube.a in Frameworks */,
+				395F651FC37E4F5D9E5632B9 /* libRNLocalize.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -429,6 +435,7 @@
 				2D02E4C71E0B4AEC006451C7 /* libRCTText-tvOS.a in Frameworks */,
 				2D02E4C81E0B4AEC006451C7 /* libRCTWebSocket-tvOS.a in Frameworks */,
 				00E31B9C0B664A3C943A1CFF /* libRNVectorIcons-tvOS.a in Frameworks */,
+				58CE71CB197E4154914733A8 /* libRNLocalize-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -603,6 +610,7 @@
 				971960BEB2944F68A6A06E27 /* RNVectorIcons.xcodeproj */,
 				D7B7E956B5CD48109BD05D73 /* RCTVideo.xcodeproj */,
 				5EA3ADEC149D41498AD43E26 /* RCTYouTube.xcodeproj */,
+				6947C8A2A9BC4934BC0CEC38 /* RNLocalize.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1273,12 +1281,15 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-video/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-youtube/**",
+					"$(SRCROOT)/../node_modules/react-native-localize/ios",
 				);
 			};
 			name = Debug;
@@ -1304,12 +1315,15 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-video/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-youtube/**",
+					"$(SRCROOT)/../node_modules/react-native-localize/ios",
 				);
 			};
 			name = Release;
@@ -1335,6 +1349,7 @@
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-video/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-youtube/**",
+					"$(SRCROOT)/../node_modules/react-native-localize/ios",
 				);
 			};
 			name = Debug;
@@ -1359,6 +1374,7 @@
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-video/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-youtube/**",
+					"$(SRCROOT)/../node_modules/react-native-localize/ios",
 				);
 			};
 			name = Release;
@@ -1392,12 +1408,15 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-video/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-youtube/**",
+					"$(SRCROOT)/../node_modules/react-native-localize/ios",
 				);
 			};
 			name = Debug;
@@ -1431,12 +1450,15 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-video/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-youtube/**",
+					"$(SRCROOT)/../node_modules/react-native-localize/ios",
 				);
 			};
 			name = Release;
@@ -1469,12 +1491,15 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-video/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-youtube/**",
+					"$(SRCROOT)/../node_modules/react-native-localize/ios",
 				);
 			};
 			name = Debug;
@@ -1507,12 +1532,15 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-video/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-youtube/**",
+					"$(SRCROOT)/../node_modules/react-native-localize/ios",
 				);
 			};
 			name = Release;

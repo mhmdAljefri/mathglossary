@@ -6,9 +6,7 @@ import {
   View,
 } from 'react-native';
 import { getFullWidth } from "../../helpers/ui";
-import { COLORS } from '../../helpers/ui';
 import Search from './Search';
-import MyIcon from './MyIcon';
 import { withNavigation } from 'react-navigation';
 import { I18n } from 'react-redux-i18n';
 
@@ -33,7 +31,7 @@ class SearchFilter extends Component {
   }
   toggleSearch = () => this.setState({ isSearch: !this.state.isSearch })
   render() {
-    const { onPressSearchDone, title } = this.props
+    const { onPressSearchDone, title = '' } = this.props
     const { isSearch } = this.state;
     return (
       <View style={styles.header}>

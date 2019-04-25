@@ -6,6 +6,7 @@ export default  {
   // B
   // C
   clear: 'تصفية',
+  check_your_email: 'تمت إضافة حسابك, يرجى التاكد من البريد الاكتروني',
   // D
   description: 'الوصف',
   // E

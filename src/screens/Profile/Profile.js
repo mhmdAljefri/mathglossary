@@ -73,7 +73,7 @@ class Profile extends React.Component {
     this.props.navigation.navigate('Profile')
   }
   render() {
-    const { data, onLogout } = this.props;
+    const { data } = this.props;
     
     return (
       <View style={style.container}>

@@ -1,4 +1,5 @@
 import Api from '../../helpers/api';
+import { Alert } from 'react-native';
 
 export const signin = (params = {}) => dispatch => {
   dispatch({
@@ -8,9 +9,11 @@ export const signin = (params = {}) => dispatch => {
   .then(response => dispatch({
     type: 'SIGNIN_FULFILLED',
     payload: response,
-  })).catch((error) => dispatch({
+  })).catch((error) => {
+    Alert.alert(error)
+    dispatch({
     type: 'SIGNIN_REJECTED',
     payload: error,
-  }));
+  })});
   return payload;
 };

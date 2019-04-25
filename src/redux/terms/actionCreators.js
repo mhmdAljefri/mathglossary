@@ -1,6 +1,6 @@
 import Api from '../../helpers/api';
 
-export const getList = (params = {}, pushArray = false) => dispatch => {
+export const getTerms = (params = {}, pushArray = false) => dispatch => {
   dispatch({
     type: 'GET_MATHWORDS',
   })

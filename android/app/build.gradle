@@ -101,7 +101,7 @@ android {
         applicationId "com.mathglossary"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 4
+        versionCode 8
         versionName "2.0.1"
         ndk {
             abiFilters "armeabi-v7a", "x86"
@@ -151,6 +151,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-localize')
     implementation project(':react-native-youtube')
     implementation project(':react-native-video')
     implementation project(':react-native-vector-icons')

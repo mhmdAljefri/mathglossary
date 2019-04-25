@@ -11,7 +11,11 @@ const Register = ({signup}) => {
     { icon: 'lock', key: 'password', placeholder: 'user_password' },
   ];
 
-  const handleRegister = (values) => signup(values).catch(handleError);
+  const handleRegister = (values) => signup(values)
+  .then(handleSuccess)
+  .catch(handleError);
+
+  const handleSuccess = () => Alert.alert(I18n.t('check_your_email'))
   const handleError = () => Alert.alert(I18n.t('somthing_goes_wrong'))
 
   return (

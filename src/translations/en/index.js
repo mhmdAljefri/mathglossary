@@ -6,6 +6,7 @@ export default  {
   // B
   // C
   clear: 'Clear',
+  check_your_email: 'Your account has been created, Please check your email',
   // D
   description: 'Description',
   // E
@@ -47,10 +48,10 @@ export default  {
   search_hint: 'Search about...',
   // T
   task_done: 'Task done',
-  translate_any_math_term: 'Translate Any Math Glossary',
+  translate_any_math_term: 'Translate Any Math Terms',
   terms: 'Terms',
   testsites: 'Test',
-  testsites_description: 'Test your Knowladage',
+  testsites_description: 'Test your knowledge',
   title_ar: 'Title ar',
   title_en: 'Title en',
   title: 'Title',

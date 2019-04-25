@@ -84,7 +84,7 @@ class Container extends React.Component {
 
   handleSubmit = () => {
     this.setState({ fetching: true })
-    return this.props.onSubmit(this.form)
+    const request = this.props.onSubmit(this.form)
         .then(() => {
           this.setState({ fetching: false })
           this.props.navigation.navigate('Profile')
@@ -92,6 +92,7 @@ class Container extends React.Component {
         .catch(() => {
           this.setState({ fetching: false })
         })
+    return request;
   }
 
   setFormField = ({ value, key }) => this.form = {...this.form, [key]: value};
@@ -113,7 +114,7 @@ class Container extends React.Component {
     const { fetching } = this.state;
     const arrowDirection = locale === 'ar' ? 'right' : 'left';
     return (
-      <Animatable.View animation="slideInRight" >
+      <Animatable.View animation="fadeIn" >
         <ImageBackground source={BG} style={styles.imageBackground} >
           <View style={styles.container}>
             <Icon onPress={this.handleBack} name={`arrow-${arrowDirection}`} color="#fff" size={24} style={styles.backButton} />

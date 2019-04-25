@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import {  View, NetInfo } from 'react-native';
+import { connect } from 'react-redux';
+
+import { setLocale } from 'react-redux-i18n';
+import { setAppLocale } from '../../redux/locales/actionCreators'
+
 import Offline from './components/Offline';
 import { withNavigation } from 'react-navigation';
+import * as RNLocalize from "react-native-localize";
 
 class Container extends Component {
   constructor(props) {
@@ -10,13 +16,20 @@ class Container extends Component {
       isConnected: true,
     };
   }
-
+  
   componentDidMount() {
+    RNLocalize.addEventListener("change", this.handleLocalizationChange);
     NetInfo.isConnected.addEventListener('connectionChange', this.handleConnectivityChange);
   }
 
   componentWillUnmount() {
     NetInfo.isConnected.removeEventListener('connectionChange')
+  }
+
+  handleLocalizationChange = () => {
+    const locale = (RNLocalize.getLocales()[0].isRTL) ? 'ar' : 'en';
+    this.props.changeLocale(locale)
+    console.log({locale})
   }
 
   handleConnectivityChange = isConnected => {
@@ -33,5 +46,12 @@ class Container extends Component {
   }
 }
 
+const mapDispatchToProps = (dispatch) => ({
+  changeLocale: (locale) => {
+    dispatch(setAppLocale(locale));
+    dispatch(setLocale(locale));
+  }
+})
 
-export default withNavigation(Container);
+
+export default connect(null, mapDispatchToProps)(withNavigation(Container));

@@ -8,9 +8,9 @@ const initialState = {
 export default (state = initialState, { type, payload }) => {
   switch (type) {
     case 'SIGNIN':
-      return {
-        ...state,
-        fetching: true,
+    return {
+      ...state,
+      fetching: true,
       };
   
     case 'SIGNIN_FULFILLED':

@@ -8,7 +8,6 @@ import * as Animatable from 'react-native-animatable';
 import { I18n } from 'react-redux-i18n';
 import _ from 'lodash';
 import ListItem from '../../../components/ListItem';
-import NoData from '../../../components/NoData';
 import Continer from '../../../components/Continer';
 import HeaderFilter from '../../../components/HeaderFilter';
 import Modal from '../../../components/Modal';
@@ -43,7 +42,7 @@ export default class List extends Component {
   }
 
   _keyboardDidShow = () => {
-    this.setState({ keyboardHidden: false })    
+    this.setState({ keyboardHidden: false })
   }
 
   _keyboardDidHide = () => {
@@ -51,7 +50,7 @@ export default class List extends Component {
   }
 
   handleGetList = (params, pushArray) => {
-    const { getList, } = this.props;
+    const { getList } = this.props;
     const { search } = this.state
     getList({ search, ...params }, pushArray);
   }
@@ -76,7 +75,7 @@ export default class List extends Component {
   wrapView = node => this.view = node;
 
   render() {
-    const { fetching: refreshing, list, error } = this.props;
+    const { fetching, list, error, message } = this.props;
     const { keyboardHidden } = this.state;
 
     return (
@@ -99,14 +98,14 @@ export default class List extends Component {
 
         <Animatable.View>
           <SearchBar
+            fetching={fetching}
             name="name"
             onChangeText={search => this.setState({ search })}
             onSubmit={this.handleGetList}
           />
-        {(!_.isEmpty(list)) && (
-          
+        {(!_.isEmpty(list)) ? (
           <FlatList
-            refreshing={refreshing}
+            refreshing={fetching}
             onRefresh={this.handleGetList}
             onEndReached={this.handleEndReached}
             onEndReachedThreshold={0.1}
@@ -117,7 +116,7 @@ export default class List extends Component {
             )}
           />
         )
-        }
+        : <Paragraph style={{textAlign: 'center', }}>{error || message}</Paragraph>}
         </Animatable.View>
         <Modal
           title={I18n.t('hotel_filters')}
